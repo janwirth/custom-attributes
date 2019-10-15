@@ -29,20 +29,3 @@ function webAttribute(name, callback) {
 
     return () => observer.disconnect()
 }
-
-// example implemenation
-webAttribute('scale-to-fit', ([attrValue, el]) => {
-    if (attrValue !== null) {
-        const targetSize = Number(attrValue)
-
-        const dimensions = el.initialSize || el.getBoundingClientRect()
-
-        el.initialSize = dimensions
-        const biggerSide = Math.max(dimensions.width, dimensions.height)
-        const scaleFactor = targetSize / biggerSide
-        console.log(targetSize, biggerSide, scaleFactor)
-        el.style.transform = `scale(${scaleFactor})`
-    } else {
-        el.style.transform = null
-    }
-});
