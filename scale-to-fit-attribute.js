@@ -1,15 +1,18 @@
-webAttribute('scale-to-fit', ([attrValue, el]) => {
-    if (attrValue !== null) {
-        // get the target size from the attribute
-        const targetSize = Number(attrValue)
+import * as customAttributes from "./web-attributes";
 
-        const dimensions = el.initialSize || el.getBoundingClientRect()
+export const register = () =>
+    customAttributes.register("scale-to-fit", ([attrValue, el]) => {
+        if (attrValue !== null) {
+            // get the target size from the attribute
+            const targetSize = Number(attrValue);
 
-        el.initialSize = dimensions
-        const biggerSide = Math.max(dimensions.width, dimensions.height)
-        const scaleFactor = targetSize / biggerSide
-        el.style.transform = `scale(${scaleFactor})`
-    } else {
-        el.style.transform = null
-    }
-})
+            const dimensions = el.initialSize || el.getBoundingClientRect();
+
+            el.initialSize = dimensions;
+            const biggerSide = Math.max(dimensions.width, dimensions.height);
+            const scaleFactor = targetSize / biggerSide;
+            el.style.transform = `scale(${scaleFactor})`;
+        } else {
+            el.style.transform = null;
+        }
+    });
